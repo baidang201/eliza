@@ -1,0 +1,25 @@
+{
+    "name": "@elizaos/plugin-musicgen",
+    "version": "0.1.9",
+    "type": "module",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "build": "tsup",
+        "dev": "tsup --watch",
+        "typecheck": "tsc --noEmit"
+    },
+    "dependencies": {
+        "@elizaos/core": "workspace:*",
+        "node-fetch": "^3.3.0"
+    },
+    "devDependencies": {
+        "@types/node": "^20.0.0",
+        "typescript": "^4.9.0",
+        "eslint": "^8.0.0",
+        "tsup": "^8.0.0"
+    },
+    "peerDependencies": {
+        "@elizaos/core": "*"
+    }
+}
