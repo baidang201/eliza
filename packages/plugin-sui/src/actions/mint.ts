@@ -1,5 +1,6 @@
 import type {
     Action,
+    Content,
     IAgentRuntime,
     Memory,
     State,
@@ -9,8 +10,15 @@ import { walletProvider } from "../providers/wallet";
 import { SuiClient, getFullnodeUrl } from "@mysten/sui/client";
 import { Transaction } from "@mysten/sui/transactions";
 import type { MintNFTOptions } from "../types";
+import { parseAccount, SuiNetwork } from "../utils";
 import { generateObject, ModelClass } from "@elizaos/core";
 import { z } from "zod";
+
+export interface MintNFTPayload extends Content {
+    name: string;
+    description: string;
+    url: string;
+}
 
 // 定义NFT参数提取模板
 const mintTemplate = `Extract NFT information from the following message:
@@ -75,13 +83,17 @@ const mintNFT: Action = {
                 runtime,
                 context,
                 schema: mintSchema,
-                modelClass: ModelClass.MEDIUM,
+                modelClass: ModelClass.SMALL,
             });
 
             console.log("[SUI] Extracted content:", content);
 
+            console.log("Generated content:", content);
+            const mintContent = content.object as SwapPayload;
+            console.log("Mint content:", mintContent);
+
             // 验证必要参数
-            if (!content.name || !content.description || !content.url) {
+            if (!mintContent.name || !mintContent.description || !mintContent.url) {
                 throw new Error(
                     "Missing required parameters: name, description, or url"
                 );
@@ -120,14 +132,15 @@ const mintNFT: Action = {
             const suiClient = new SuiClient({
                 url: getFullnodeUrl(network as SuiNetwork),
             });
+            console.log("network", network);
 
             const tx = new Transaction();
             tx.moveCall({
                 target: `${packageId}::${module}::mint_to_sender`,
-                arguments: [content.name, content.description, content.url],
+                arguments: [tx.pure.string(mintContent.name), tx.pure.string(mintContent.description), tx.pure.string(mintContent.url)],
             });
 
-            const result = await client.signAndExecuteTransaction({
+            const result = await suiClient.signAndExecuteTransaction({
                 signer: suiAccount,
                 transaction: tx,
             });
