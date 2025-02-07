@@ -15,6 +15,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { NavLink } from "react-router-dom";
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -756,6 +757,24 @@ const SidebarMenuSubButton = React.forwardRef<
     );
 });
 SidebarMenuSubButton.displayName = "SidebarMenuSubButton";
+
+interface SidebarItemProps {
+    href: string;
+    icon: React.ReactNode;
+    text: string;
+    active?: boolean;
+}
+
+export function SidebarItem({ href, icon, text, active }: SidebarItemProps) {
+    return (
+        <NavLink to={href}>
+            <SidebarMenuButton isActive={active}>
+                {icon}
+                <span>{text}</span>
+            </SidebarMenuButton>
+        </NavLink>
+    );
+}
 
 export {
     Sidebar,

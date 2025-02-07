@@ -12,11 +12,12 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
     SidebarMenuSkeleton,
+    SidebarItem,
 } from "@/components/ui/sidebar";
 import { apiClient } from "@/lib/api";
 import { NavLink, useLocation } from "react-router";
 import type { UUID } from "@elizaos/core";
-import { Book, Cog, User } from "lucide-react";
+import { Book, Cog, User, IconRobot, Image } from "lucide-react";
 import ConnectionStatus from "./connection-status";
 
 export function AppSidebar() {
@@ -96,6 +97,12 @@ export function AppSidebar() {
                             )}
                         </SidebarMenu>
                     </SidebarGroupContent>
+                    <SidebarItem
+                        href="/nfts"
+                        icon={<Image className="w-4 h-4" />}
+                        text="NFTs"
+                        active={location.pathname === '/nfts'}
+                    />
                 </SidebarGroup>
             </SidebarContent>
             <SidebarFooter>
