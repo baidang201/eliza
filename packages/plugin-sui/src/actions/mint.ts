@@ -89,7 +89,7 @@ const mintNFT: Action = {
             console.log("[SUI] Extracted content:", content);
 
             console.log("Generated content:", content);
-            const mintContent = content.object as SwapPayload;
+            const mintContent = content.object as MintNFTPayload;
             console.log("Mint content:", mintContent);
 
             // 验证必要参数
@@ -98,30 +98,6 @@ const mintNFT: Action = {
                     "Missing required parameters: name, description, or url"
                 );
             }
-
-            // let content;
-            // try {
-            //     if (typeof message.content === 'string') {
-            //         console.log("[SUI] message.content:", message.content);
-            //         // 尝试从字符串中提取JSON
-            //         const match = message.content.match(/\{[\s\S]*\}/);
-            //         console.log("[SUI] match:", match);
-            //         if (match) {
-            //             content = JSON.parse(match[0]);
-            //         }
-            //     } else if (typeof message.content === 'object') {
-            //         // 如果已经是对象，直接使用
-            //         content = message.content;
-            //     }
-
-            //     console.log("[SUI] before mintSchema.parse(content):",  message.content,content);
-
-            //     // 验证内容格式
-            //     content = mintSchema.parse(content);
-            // } catch (parseError) {
-            //     console.error("[SUI] Failed to parse content:", parseError);
-            //     throw new Error("Invalid NFT parameters format. Please provide name, description and url in JSON format.");
-            // }
 
             // 获取合约配置
             const packageId = runtime.getSetting("NFT_PACKAGE_ID");
@@ -132,7 +108,8 @@ const mintNFT: Action = {
             const suiClient = new SuiClient({
                 url: getFullnodeUrl(network as SuiNetwork),
             });
-            console.log("network", network);
+            console.log("@@@suiAccount", suiAccount.toSuiAddress());
+            console.log("@@@network", network);
 
             const tx = new Transaction();
             tx.moveCall({
@@ -172,7 +149,7 @@ const mintNFT: Action = {
             {
                 user: "{{user1}}",
                 content: {
-                    text: "创建nft name为: 睡觉, content为：歌声悠扬绕梁间，心灵共鸣乐无边。旋律如流水潺潺，温暖心扉入梦田, url为：ipfs://QmXXX...",
+                    text: "Create an nft named: Sleep, content: The melodious song lingers in the air, and the soul resonates with boundless joy. The melody is like the gurgling of water, warming the heart and entering the dream field, url: ipfs://QmXXX..x.mp3",
                 },
             },
             {
