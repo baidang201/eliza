@@ -47,7 +47,7 @@ Example:
     "tags": "electronic, dance, upbeat",
     "title": "Energetic EDM",
     "make_instrumental": false,
-    "model": "major",
+    "model": "chirp-v3-5",
     "wait_audio": true,
     "negative_tags": "rock, metal"
 }
@@ -110,7 +110,7 @@ const customGenerateMusic: Action = {
                     tags: customGenerateContent.tags || "chinese",
                     title: customGenerateContent.title,
                     make_instrumental: false,
-                    model: "chirp-v3-5|chirp-v3-0",
+                    model: "chirp-v3-5",
                     wait_audio: true,
                     negative_tags: customGenerateContent.negative_tags
                 })
@@ -120,7 +120,7 @@ const customGenerateMusic: Action = {
 
             if (callback) {
                 callback({
-                    text: 'Successfully generated custom music',
+                    text: 'Successfully generated custom music: ${response}',
                     content: response
                 });
             }
