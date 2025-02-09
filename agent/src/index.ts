@@ -145,7 +145,7 @@ import yargs from "yargs";
 import { emailPlugin } from "@elizaos/plugin-email";
 import { emailAutomationPlugin } from "@elizaos/plugin-email-automation";
 import { seiPlugin } from "@elizaos/plugin-sei";
-import { sunoPlugin } from "@elizaos/plugin-suno";
+import { sunoPluginApi } from "@elizaos/plugin-suno-api";
 import { udioPlugin } from "@elizaos/plugin-udio";
 import { imgflipPlugin } from "@elizaos/plugin-imgflip";
 import { ethstoragePlugin } from "@elizaos/plugin-ethstorage";
@@ -1263,7 +1263,7 @@ export async function createAgent(
             getSecret(character, "HYPERBOLIC_API_KEY")
                 ? hyperbolicPlugin
                 : null,
-            getSecret(character, "SUNO_API_KEY") ? sunoPlugin : null,
+            getSecret(character, "SUNO_API_KEY") && getSecret(character, "SUNO_BASE_URL") ? sunoPluginApi : null,
             getSecret(character, "UDIO_AUTH_TOKEN") ? udioPlugin : null,
             getSecret(character, "IMGFLIP_USERNAME") &&
             getSecret(character, "IMGFLIP_PASSWORD")

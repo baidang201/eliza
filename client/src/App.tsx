@@ -9,6 +9,7 @@ import Chat from "./routes/chat";
 import Overview from "./routes/overview";
 import Home from "./routes/home";
 import useVersion from "./hooks/use-version";
+import NFTsRoute from "@/routes/nfts";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -44,6 +45,7 @@ function App() {
                                             path="settings/:agentId"
                                             element={<Overview />}
                                         />
+                                        <Route path="/nfts" element={<NFTsRoute />} />
                                     </Routes>
                                 </div>
                             </SidebarInset>

@@ -17,7 +17,7 @@ import {
 import { apiClient } from "@/lib/api";
 import { NavLink, useLocation } from "react-router";
 import type { UUID } from "@elizaos/core";
-import { Book, Cog, User, IconRobot, Image } from "lucide-react";
+import { Book, Cog, User, Image } from "lucide-react";
 import ConnectionStatus from "./connection-status";
 
 export function AppSidebar() {
