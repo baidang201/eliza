@@ -120,7 +120,7 @@ const customGenerateMusic: Action = {
 
             if (callback) {
                 callback({
-                    text: 'Successfully generated custom music: ${response}',
+                    text: `Successfully generated custom music: ${ JSON.stringify(response) }`,
                     content: response
                 });
             }
