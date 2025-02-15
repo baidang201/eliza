@@ -198,9 +198,21 @@ export default function NFTsRoute() {
           throw new Error('Invalid response format');
         }
 
+        interface NFTData {
+          data: {
+            objectId: string;
+            content: {
+              fields: {
+                name?: string;
+                url?: string;
+              };
+            };
+          };
+        }
+
         const nftList = data.data
-          .filter(item => item.data && item.data.content)
-          .map(item => ({
+          .filter((item: NFTData)  => item.data && item.data.content)
+          .map((item: NFTData)  => ({
             hash: item.data.objectId,
             name: item.data.content.fields.name || 'Unnamed NFT',
             imageUrl: item.data.content.fields.url || '',
